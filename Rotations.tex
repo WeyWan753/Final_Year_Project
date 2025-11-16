@@ -1,0 +1,484 @@
+\chapter{Preliminaries}
+\section{Linear Rotation in $\mathbb{R}^n$}	\label{linear rotation}
+Before introducing rotations, we recall the standard notions of inner product and norm in $\R^n$.
+For two vectors $v_1 = (a_1,a_2,a_3, \dots, a_n)$ and $v_2=(b_1,b_2,b_3, \dots , b_n)$ in $\R^n$, the inner product (dot product) is defined by
+\[	v_1 \cdot v_2 = \sum_{i = 1} ^ n a_ib_i =  a_1b_1 + a_2b_2 + a_3b_3 + \dots + a_nb_n 	\]
+
+The norm (or length) of a vector $v \in \R^n$ is then defined using the inner product:
+\[	||v|| = \sqrt{v \cdot v}	\]    
+
+\begin{definition}
+Let $L : \R^n \rightarrow \R^n$ be a linear operator. Since $\R^n$ is finite-dimensional, $L$ always has a $n \times n$ matrix representation with respect to the standard basis. From here on, we will mostly treat L as a matrix rather than an operator. $L$ is a linear rotation if:
+\begin{enumerate} 
+	\item It preserve lengths:
+	\[	||Lv|| = ||v|| \quad \text{for all } v \in \R^n	\]
+	\item Its determinant of matrix representation is one
+	\[	\text{det}(L) = 1	\]
+	\end{enumerate}
+\end{definition}
+
+This definition gives a precise way to describe what we mean by a rotation in $\R^n$ in the linear case. The first condition makes sure that lengths stay the same, while the second condition rules out reflections. Together, these two points 
+capture the basic idea of a rotation as a transformation that moves vectors around without changing their size. Also, notice that a linear rotation always leaves the origin fixed.Later, we will broaden this idea to include rotations that are not necessarily centered at the origin and we will explore how to handle such case.
+
+\section{The special orthogonal group $SO(n)$}
+\begin{definition}
+    Let $F$ be a field. Then the general linear group $GL_n(F)$ is the group of invertible $n \times n$ matrices with entries in $F$ under matrix multiplication. \\
+    Equivalently,
+    \[
+		GL_n(F) := \{ A \in M_n(F) \ |\  \text{det}(A) \neq 0\}
+    \]
+\end{definition}
+   
+Every invertible linear transformation $T : V \rightarrow V$ on an n-dimensional vector space over a field $F$ can be represented, with respect to a basis, by an invertible $n \times n$ matrix. The collection of all such invertible matrices form the general linear group, $GL_n(F)$. Thus, $GL_n(F)$ provides the matrix representation of all invertible linear transformation of $F^n$. 
+
+
+
+\begin{definition}
+	A square matrix $A \in \R^{n \times n}$ is orthogonal if $A^TA = AA^T = I$. The special orthogonal group $SO(n)$ is defined as the subgroup of the general linear group $GL_n(\R)$ consisting of $n \times n$ real matrices that are orthogonal and have determinant equal to 1. Equivalently,
+    \[
+		SO(n) := \{A \in GL_n(\R) \ | \  A^TA=AA^T=I_n, \ \text{det}(A) = 1\}
+    \]
+\end{definition}
+ 	
+\begin{lemma}
+	$SO(n)$ is a subgroup of $GL_n(\R)$
+\end{lemma}
+
+\begin{proof}
+	First, $I_n \in SO(n)$ because $I_n^TI_n^{\phantom{T}} = I_n^{\phantom{T}}I_n^T = I_n$ and det($I$) = 1, so the set is nonempty.  
+
+    Let $A,B \in SO(n)$. Then
+    \[
+        \det(AB^{-1}) = \det(A)\det(B^{-1}) = 1 \cdot 1 = 1.
+    \]
+    Moreover,
+    \[
+        (AB^{-1})^T(AB^{-1}) = (B^T)^{-1}(A^TA)B^{-1} 
+        = (B^TB)^{-1} = I_n,
+    \]
+    and similarly,
+    \[
+        (AB^{-1})(AB^{-1})^T 
+        = A(B^TB)^{-1}A^T 
+        = AA^T = I_n.
+    \]
+	Thus $AB^{-1} \in SO(n)$, and so $SO(n)$ is a subgroup of $GL_n(\R)$.
+\end{proof}
+
+\begin{proposition}
+    The set of all linear rotation in $\R^n$ is exactly the $SO(n)$ matrices.
+\end{proposition}
+
+\begin{proof}
+	Suppose $L$ is a linear rotation as in \ref{linear rotation}. By condition (1), for every $v \in \R^n$ we have
+		\[	||Lv||^2 = ||v||^2 \] \\
+		\text{Writing this in terms of the inner product,} \\
+		\[	(Lv) \cdot (Lv) = v \cdot v	\] \\
+		\text{Using the standard matrix form of the dot product, this becomes} \\
+		\[(Lv)^T(Lv) = v^Tv	\] \\
+		\text{Expanding the left-hand side,} \\
+		\[	v^T(L^TL)v = v^Tv	\] \\
+		\text{Bringing terms together,} \\
+		\[	v^T(L^TL)v - v^Tv = 0	\] \\
+		\text{or equivalently,} \\
+		\[	v^T(L^TL-I)v = 0  \text{\quad for all $v$} \] \\
+		\text{Since the left hand side equation vanishes for all $v$, the only possibility is} \\
+		\[	L^TL-I = 0	\] \\
+		\text{so} \\
+		\[	L^TL = I	\] \\
+
+	Together with the condition $\text{det}(L) = 1$, This shows That $L$ is in $SO(n)$. \\
+	Now for the converse, suppose $L \in SO(n)$ and $v \in \R^n$
+	  \[	||Lv|| = \sqrt{Lv \cdot Lv} = \sqrt{v^TL^TLv} = \sqrt{v^Tv} = \sqrt{v \cdot v} = ||v||	\]
+	so $L$ preserve lengths. Since $\text{det}(L) = 1$ by assumption, $L$ is a linear rotation.
+\end{proof}
+
+
+\section{The special unitary group $SU(n)$}
+
+\begin{definition}
+	A square matrix $U \in \C^{n \times n}$ is unitary if its inverse is equal to its conjugate transpose. The special unitary group $SU(n)$ is defined as the subgroup of the general linear group $GL_n(\C)$ consisting of $n \times n$ complex matrices that are unitary and have determinant equal to 1. Equivalently,
+\[
+    SU(n) := \{U \in GL_n(\C) \ | \ U^*U = I_n, \  \text{det}(U) = 1\}
+\]
+Where $U^*$ denotes the conjugate transpose of U.   
+\end{definition}
+
+\begin{lemma}
+	$SU(n)$ is a subgroup of $GL_n(\C)$
+\end{lemma}
+\begin{proof}
+	First, note that the identity matrix $I \in SU(2)$ since
+		\[	I^*I = II^* = I, \quad \text{det}(I) =1	\]
+	Thus, $SU(2)$ is non empty.
+
+	Next, let $U,V \in SU(2)$. Then
+	\begin{align*}
+		(UV^{-1})^*(UV) &= \overbar{(UV^{-1})^T}(UV^{-1}) \\
+		&= \overbar{((V^{-1})^TU^T)}(UV^{-1}) \\
+		&= \overbar{((V^{-1})^T)}\overbar{(U^T)}UV^{-1} \\
+		&= (\overbar{V^T})^{-1}U^*UV^{-1} \\
+		&= (VV^*)^{-1} \\
+		&= I \\
+	\end{align*}
+	Similarly we have $(UV)(UV)^* = I$. Hence $UV$ is unitary. Moreover,
+	\[	\text{det}(UV) = \text{det}(U)\text{det}(V) = 1 \cdot 1 = 1	\]
+	Thus, $UV^{-1} \in SU(2)$ and we concluded that $SU(2)$ is a subgroup of $GL_n(\C)$ 
+	\end{proof}
+
+\begin{proposition}
+	Every $U \in SU(2)$ can be written as
+	
+
+	\[	
+		U = 
+		\begin{pmatrix}
+		\alpha & \beta \\
+		-\overline{\beta} & \overline{\alpha} \\
+		\end{pmatrix},
+		\quad \alpha,\beta \in \C, \quad |\alpha|^2 + |\beta|^2 = 1.
+	\]
+
+\end{proposition}
+
+\begin{proof}
+	Let 
+	\[
+		U = 
+		\begin{pmatrix}
+			a & b \\
+			c & d \\
+		\end{pmatrix}
+		\in SU(2)
+	\]
+	Because $U$ is unitary, we have $U^{-1} = U^*$. We have
+	\[
+		U^{-1} = 
+		\begin{pmatrix}
+			d & -b \\
+			-c & a
+		\end{pmatrix}
+	\]
+	and for the conjugate transpose we have
+	\[
+		U^* = 
+		\begin{pmatrix}
+			\overline{a} & \overline{c} \\
+			\overline{b} & \overline{d} \\
+		\end{pmatrix}
+	\]
+	Entry wise this yields
+	\[	\overline{a} = d, \quad  \overline{c} = -b, \quad  \overline{b} = -c, \quad  \overline{d} = a	\]
+	Subtituting these into $U$ gives 
+	\[
+		U = 
+		\begin{pmatrix}
+			a & b \\
+			-\overline{b} & \overline{a} \\
+		\end{pmatrix}
+	\]
+	for the determinant condition, we need to have $|a|^2 + |b|^2 = 1$.
+\end{proof}
+
+
+\section{General rotation in $\R^n$}
+\begin{definition}
+Linear rotations, as defined in \ref{linear rotation}, always keep the origin fixed. In geometry, however, rotations are not always centered at the origin they can occur anywhere in $\R^n$. To describe this more general situation, we extend the definition. A general rotation in $\R^n$ is a map of the form 
+\[	R(v) = a + Lv, \quad v \in \R^n	\] 
+where $L$ is a linear rotation and $a$ is some point in $\R^n$
+
+
+\end{definition}
+
+	Recall that for a linear operator T between vector spaces, $T : V \rightarrow W$, The kernel of T is defined as
+	\[	\text{ker}(T) = \{v \in V \ |\  T(v) = 0_W\}	\]
+Where $0_W$ is the zero vector of vector space W \\ 
+\begin{lemma} \label{kernelsubspace}
+	Let $T : V \rightarrow W$ be a linear operator between vector spaces, Then ker($T$) is a subspace of V.
+\end{lemma}
+\begin{proof}
+	$0_V \in \text{ker}(V)$ so ker($T$) is non empty because 
+	\begin{align*}
+		T(0_V) &= T(0_V) + T(0_V) - T(0_V) \\ 
+		&= T(0_V + 0_V) - T(0_V) \\ 
+		&= T(0_V) - T(0_V) \\
+		&= 0_W \\  
+	\end{align*}
+	Next, let $u,v \in \text{ker}(T)$. Then
+	\[	T(u+v) = T(u) + T(v) = 0_W + 0_W = 0_W,\]
+	so $u+v \in \text{ker}(T)$. Similarly, for any scalar $c$,
+	\[	T(cu) = cT(u) = 0_W\]
+	so $cu \in \text{ker}(T)$. 
+	Thus, ker($T$) is a subspace of V
+\end{proof}
+\begin{lemma} \label{eigenprod}
+	let $A \in \R^{n \times n}$ and $\lambda_1,\lambda_2,\cdots,\lambda_n \in \C$ be the eigenvalues of $A$. Then	\[	\text{det}(A) = \lambda_1\lambda_2\cdots\lambda_n	\]
+\end{lemma}
+
+\begin{proof}
+	A scalar $\lambda \in \C$ is an eigenvalue of A if and only if there exist a nonzero vector v such that	\[	Av = \lambda v	\]
+
+	this condition is equivalent to \[	(A - \lambda I)v = 0 \]
+
+	which hold for if and only if $A - \lambda I$ is singular. Therefore, $\lambda$ is an eigenvalues of A if and only if \[	\text{det}(A - \lambda I) = 0	\]
+
+	The polynomial \[	p_A(\lambda) = \text{det}(A - \lambda I)	\]
+
+	is called the charateristic polynomial of A. Since $p_A(\lambda)$ is a degree-n polynomial with real coefficient, its root are precisely the eigenvalues of A. By Fundamental Theorem of Algebra, $p_A(\lambda)$ can be completely factored over $\C$ into linear factors.
+	\[	p_A(\lambda) = (-1)^n(\lambda - \lambda_1)(\lambda - \lambda_2)\cdots(\lambda - \lambda_n)	\]
+	where the factor $(-1)^n$ arises because the leading term of det($A - \lambda I$) is obtained by taking $-\lambda$ from each diagonal entry, giving $(-\lambda)^n = (-1)^n\lambda^n$ \\
+
+	Finally, evaluating at $\lambda = 0$ yields
+	\[	\text{det}(A) = p_A(0) = (-1)^n(-\lambda_1)(-\lambda_2)\cdots(-\lambda_n) = \lambda_1\lambda_2\cdots\lambda_n	\]
+	as required.
+	
+\end{proof}
+
+\begin{theorem} \label{eigenvalues}
+	let $L \in SO(3)$. Then the eigenvalues of $L$ are \[	\{1,e^{i\theta},e^{-i\theta}\}	\]
+	for some $\theta \in [0,2\pi)$ 
+\end{theorem}
+
+\begin{proof}
+	First, we show that 1 is always an eigenvalue. Since $L$ is orthogonal and $\text{det}(L) = 1$ and $L$ is $3 \times 3$ matrix,
+	\begin{align*}	
+		\text{det}(L - I) &= \text{det}(L - LL^T) \\
+		&= \text{det}(L)\text{det}(I - L^T)	\\
+		&= \text{det}\left((I - L^T)^T\right) \\
+		&= \text{det}(I - L) \\
+		&= (-1)^3\text{det}(L - I)	\\
+		&= -\text{det}(L - I) \\
+	\end{align*}
+	which forces $\text{det}(L - I) = 0$. Hence 1 is an eigenvalue of L. \\
+
+	Now let the other two eigenvalues be $\lambda_2,\lambda_3$. By lemma \ref{eigenprod} the determinant equals the product of the eigenvalues,
+	\[	\text{det}(L) = \lambda_2\lambda_3 = 1	\]
+
+	Next, we show that all eigenvalues of $L$ lie on the unit circle. Suppose $\lambda$ is an eigenvalue so there exist nonzero vector $v$ such that $Lv = \lambda v$. Taking norms,
+	\[	||Lv|| = ||\lambda v|| = |\lambda|||v||	\]
+	But since $L$ is orthogonal, $||Lv|| = ||v||$. Therefore $|\lambda| = 1$, This show all eigenvalues of $L \in SO(3)$ lies on unit circle in $\C$.
+
+	So, we may write
+		\[	\lambda_2 = e^{i\theta_2} , \quad \lambda_3 = e^{i\theta_3}	\]
+	for some real $\theta_2,\theta_3 \in [0,2\pi)$. The product condition becomes 
+		\[	e^{i(\theta_2+\theta_3)} = 1	\]
+	which implies $\theta_3 = -\theta_2$. Hence, the eigenvalues of $L$ are
+		\[	\{1,e^{i\theta},e^{-i\theta}\}	\]
+	as required.
+
+\end{proof}
+
+	We now consider the operator $L - I$ where $L \in SO(3)$. Its kernel is 
+\[	\text{ker}(L - I) = \{v \in \R^3 \  | \  (L - I)v = 0 \} = \{v \in \R^3 \  | \  Lv = v\}	\]
+Thus, ker($L - I$) is the set of all vector in $\R^3$ that is fixed by $L$ \\
+
+\begin{proposition}
+	let $L \in SO(3)$ with $L \neq I$. Then ker(L - I) is 1 dimensional subspace of $\R^3$
+\end{proposition}
+	
+\begin{proof}
+	Since $L - I$ is a linear operator on $\R^3$ by Lemma \ref{kernelsubspace} its kernel is a subspace of $\R^3$. By Theorem \ref{eigenvalues}, 1 is an eigenvalue of $L$. Hence, there exist a nonzero vector $u \in \R^3$ such that $Lu = u$, which is equivalent to $(L - I)u = 0$. Therefore $u \in \text{ker}(L - I)$, and so \[	\text{dim}\left(\text{ker}(L - I)\right) \ge 1	\]
+	
+	If dim(ker($L - I$)) = 3, then ker($L - I$) = $\R^3$, which implies $(L - I)v = 0$ for all $v \in \R^3$. Hence $L = I$, contradicting the assumption $L \neq I$. Thus
+	\[	\text{dim}\left(\text{ker}(L - I)\right) \neq 3	\]
+
+	suppose for contradiction that dim(ker($L - I$)) = 2. Then we may choose an orthogonal basis $\{u,v\}$ for ker($L - I$) via Gram-Schmidt process. Extending this to an orthogonal basis $\{u,v,w\}$ of $\R^3$ via Gram-Schmidt process, we have \[	Lu = u, \quad Lv = v	\]
+	Since $L$ is orthogonal, 
+	\begin{align*}
+		Lw \cdot u &= Lw \cdot Lu \\
+		&= w^TL^TLu \\
+		&= w^Tu \\
+		&= w \cdot u \\
+		&= 0 \\
+	\end{align*}
+
+	and similarly $Lw \cdot v = 0$. Therefore $Lw$ is orthogonal to both $u$ and $v$, which implies, $Lw \in \text{span}\{w\}$. Hence, $Lw = \lambda w$ for some $\lambda \in \R$
+
+	Thus, $\{u,v,w\}$ is a set of eigenvectors of $L$ with eigenvalues $1,1,\lambda$ respectively. By Lemma \ref{eigenprod},
+	\[	\text{det}(L) = 1 \cdot 1 \cdot \lambda = \lambda	\] 
+	But since $L \in SO(3)$, we have $\text{det}(L) = 1$, which forces $\lambda = 1$. Thus $\{u,v,w\}$ is a basis of $\R^3$ consisting of eigenvectors of $L$, each with eigenvalue 1. 
+	In particular,	\[	Lu = u,\quad Lv = v,\quad Lw = w	\]
+	Since a linear operator is uniquely determined by its action on basis, it follows that $L$ acts as the identity on all of $\R^3$. Hence $L = I$, contradicting the assumption $L \neq I$.
+	Therefore, we conclude \[	\text{dim}(\text{ker}(L - I)) = 1	\]
+	as required
+\end{proof}
+
+This automatically implies that $a + \text{ker}(L - I)$ is an affine line in $\R^3$ where $a$ is a point in $\R^3$
+
+\begin{definition}
+	Axis, angle and orientation of rotation for non identity rotation $L$.
+	\begin{enumerate}
+		\item
+			The one-dimensional subspace \[	\text{ker}(L - I) = \{	v \in \R^3 \  | \  Lv = v \}  \]
+			is called the axis of rotation of $L$. Every nonzero vector in ker($L - I$) is fixed by $L$, and hence represents the direction of the axis.
+		\item
+			By Theorem \ref{eigenvalues}, the remaining two eigenvalues of $L$ are complex conjugates $\{e^{i\theta},e^{-i\theta}\}$ for some $\theta \in (0,2\pi)$. This $\theta$ is called the angle of rotation of $L$.
+		\item
+			The orientation of the rotation is determined as follows:\\
+			If $\{u,v,w\}$ is a right handed orthonormal basis of $\R^3$ with $u$ along the axis of rotation, Then $L$ acts as a rotation by angle $\theta$ in the oriented plane span$\{v,w\}$
+
+
+	\end{enumerate}
+\end{definition}
+
+
+
+	A fundamental property of rotations in $ \R^3 $ is that every non-identity rotation has an axis of rotation. This is a line of fixed points that remains invariant under the transformation. In this report, we will primarily consider rotations whose axis passes through the origin (linear rotation). If the axis of rotation does not pass through the origin, then the rotation is no longer a purely linear map but an affine transformation. In such cases, we may reduce the problem to the linear case:
+    \begin{enumerate}
+        \item Translate the space so that a point on the axis is moved to the origin.
+        \item Perform the rotation about the translated axis (which now passes through the origin).
+        \item   Translate back to the original position.
+    \end{enumerate}
+    In formula :
+    \[
+        R(v) = p + L(v-p),
+    \]
+    where $L$ is purely linear rotational map and $p$ is some point on the original axis.
+
+
+\section{Topological Preliminaries}
+\begin{definition}[Topological Space]
+Let $X$ be a set. A collection of subsets $\tau_X \subseteq \mathcal{P}(X)$ (the power set of $X$) is called a
+topology on $X$ if it satisfies the following:
+
+\begin{enumerate}
+    \item The empty set and the whole set are in $\tau_X$:
+    \[
+        \varnothing \in \tau_X \quad \text{and} \quad X \in \tau_X .
+    \]
+
+    \item $\tau_X$ is closed under unions:  
+    whenever $\{U_\alpha\}_{\alpha \in A}$ is any family of sets in $\tau_X$, the union
+    \[
+        \bigcup_{\alpha \in A} U_\alpha
+    \]
+    is also in $\tau_X$.
+
+    \item $\tau_X$ is closed under finite intersections:  
+    whenever $U_1, U_2 \in \tau_X$, the intersection
+    \[
+        U_1 \cap U_2
+    \]
+    is also in $\tau_X$.
+\end{enumerate}
+
+The pair $(X,\tau_X)$ is then called a topological space, and the sets in $\tau_X$ are
+called open sets.
+\end{definition}
+
+\begin{definition}[Subspace Topology]
+Let $(X,\tau_X)$ be a topological space and let $Y \subseteq X$ be any subset.
+The subspace topology on $Y$ is defined by
+\[
+    \tau_Y = \{\, U \cap Y \;|\; U \in \tau_X \,\}.
+\]
+The pair $(Y,\tau_Y)$ is called a subspace of $X$.
+\end{definition}
+
+\begin{proof}
+We check the topology axioms.
+
+\textbf{1.} Since $\varnothing \in \tau_X$, we have
+\[
+\varnothing \cap Y = \varnothing \in \tau_Y.
+\]
+Also, since $X \in \tau_X$,
+\[
+X \cap Y = Y \in \tau_Y.
+\]
+
+\textbf{2.} Let $\{V_\alpha\}_{\alpha \in A}$ be any family of sets in $\tau_Y$.
+By definition of $\tau_Y$, for each $\alpha$ there is some $U_\alpha \in \tau_X$
+such that
+\[
+V_\alpha = U_\alpha \cap Y.
+\]
+Then
+\[
+\bigcup_{\alpha \in A} V_\alpha
+    = \bigcup_{\alpha \in A} (U_\alpha \cap Y)
+    = \left( \bigcup_{\alpha \in A} U_\alpha \right) \cap Y.
+\]
+Since $\bigcup_{\alpha \in A} U_\alpha \in \tau_X$,
+its intersection with $Y$ is in $\tau_Y$.
+
+\textbf{3.} If $V_1, V_2 \in \tau_Y$, then there exist
+$U_1, U_2 \in \tau_X$ such that
+\[
+V_1 = U_1 \cap Y, \qquad V_2 = U_2 \cap Y.
+\]
+Thus
+\[
+V_1 \cap V_2
+    = (U_1 \cap Y)\cap (U_2 \cap Y)
+    = (U_1 \cap U_2) \cap Y.
+\]
+Since $U_1 \cap U_2 \in \tau_X$, its intersection with $Y$ lies in $\tau_Y$.
+
+Hence $\tau_Y$ satisfies all topology axioms and is a topology on $Y$.
+\end{proof}
+
+\begin{definition}[Continuous Map]
+Let $(X,\tau_X)$ and $(Y,\tau_Y)$ be topological spaces.
+A function $f : X \to Y$ is said to be continuous if for every open set
+$V \in \tau_Y$, the preimage
+\[
+    f^{-1}(V) = \{\, x \in X \mid f(x) \in V \,\}
+\]
+is open in $X$.
+\end{definition}
+
+\begin{definition}[Homeomorphism]
+Let $(X,\tau_X)$ and $(Y,\tau_Y)$ be topological spaces.
+A function $f : X \to Y$ is called a homeomorphism if
+\begin{enumerate}
+    \item $f$ is a bijection,
+    \item $f$ is continuous, and
+    \item the inverse map $f^{-1} : Y \to X$ is continuous.
+\end{enumerate}
+If such a map exists, we say that $X$ and $Y$ are homeomorphic.
+\end{definition}
+
+\begin{definition}[Connected Space]
+A topological space $(X,\tau_X)$ is said to be connected if there do not exist
+nonempty open sets $U$ and $V$ in $\tau_X$ such that
+\[
+    X = U \cup V \quad \text{and} \quad U \cap V = \varnothing .
+\]
+\end{definition}
+
+A connected space cannot be written as the union of two disjoint nonempty open sets.
+\begin{definition}[Standard Topology on $\mathbb{R}^n$ and $\mathbb{C}^n$]
+For $n \ge 1$, the standard topology on $\mathbb{R}^n$ (and similarly on $\mathbb{C}^n$)
+is the topology generated by all open balls
+\[
+    B(x,r) = \{\, y \mid \|y - x\| < r \,\},
+\]
+where $x \in \mathbb{R}^n$, $r > 0$, and $\|\cdot\|$ denotes the Euclidean norm on $\mathbb{R}^n$.
+A subset $U \subseteq \mathbb{R}^n$ is open in this topology if for every point $x \in U$
+there exists $r > 0$ such that $B(x,r) \subseteq U$.
+In this sense, $\mathbb{C}^n$ is viewed as $\mathbb{R}^{2n}$ with the same Euclidean norm.
+\end{definition}
+
+
+\begin{definition}[Topology Induced by a Bijection]
+Let $(X,\tau_X)$ be a topological space and let $Y$ be a set.
+Suppose $f : X \to Y$ is a bijection.
+We define a collection of subsets of $Y$ by
+\[
+    \tau_Y := \{\, U \subseteq Y \mid f^{-1}(U) \in \tau_X \,\}.
+\]
+Then $\tau_Y$ is a topology on $Y$, called the topology induced by the bijection $f$.
+With this topology, $(Y,\tau_Y)$ becomes a topological space, and the map
+\[
+    f : (X,\tau_X) \to (Y,\tau_Y)
+\]
+is a homeomorphism.
+\end{definition}
+
+In this report, whenever there is a clear bijection between a space and a set,
+we equip the set with the topology induced by that bijection.
+For example, the space $M_n(\mathbb{R})$ of real $n \times n$ matrices
+is in bijection with $\mathbb{R}^{n^2}$ by listing the matrix entries in any fixed order.
+We therefore give $M_n(\mathbb{R})$ the topology induced by this bijection,
+so that $M_n(\mathbb{R})$ becomes a topological space homeomorphic to $\mathbb{R}^{n^2}$.

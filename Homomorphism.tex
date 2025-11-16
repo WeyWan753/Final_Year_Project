@@ -1,0 +1,308 @@
+
+\chapter{SU(2) as a double cover of SO(3)}
+
+In this report, we aim to show that SU(2) is a double cover of SO(3). Specifically we will construct an explcit group homomorphism from SU(2) to SO(3) and show that it is surjective with kernel \{$\pm I$\}, therefore establishing that the map is 2-to-1.
+
+\section{Pauli matrices}
+
+The pauli matrices $\sigma_1, \sigma_2, \sigma_3$ are defined by the $2 \times 2$ matrices : 
+\[
+	\sigma_1 = \begin{pmatrix}
+	0 & 1 \\
+	1 & 0 \\
+	\end{pmatrix}
+	\quad
+	\sigma_2 = \begin{pmatrix}
+	0 & -i \\
+	i & 0 \\
+	\end{pmatrix}
+	\quad
+	\sigma_3 = \begin{pmatrix}
+	1 & 0 \\
+	0 & -1 \\
+	\end{pmatrix}
+	\quad
+\]
+
+$\newline$
+The Pauli matrices has the following properties :
+\[
+	\begin{aligned}
+	\sigma_i^2 &= I, \quad \text{for } i = 1,2,3 \\
+	\sigma_i \sigma_j + \sigma_j \sigma_i &= 0, \quad \text{for } i \neq j
+	\end{aligned}
+\]
+$\newline$
+
+
+
+Claim. The Paulie matrices together with the identity $I$ form a basis of $M_2(\C)$ over $\C$.
+\begin{proof}
+A generic matrix $M \in M_2(\C)$ has the form of
+\[
+	M = \begin{pmatrix}
+		a & b \\
+		c & d \\
+		\end{pmatrix}
+		,\quad \quad
+		a,b,c,d \in \C
+\]
+We will show that there exist complex numbers $\alpha, \beta, \gamma, \delta$ such that 
+\[
+	M = \alpha I + \beta \sigma_1 + \gamma \sigma_2 + \delta \sigma_3
+\]
+Compute the right-hand side:
+\[
+	\alpha I + \beta \sigma_1 + \gamma \sigma_2 + \delta \sigma_3 = \begin{pmatrix}
+	\alpha + \delta & \beta - i \gamma \\
+	\beta + i \gamma & \alpha - \delta \\
+	\end{pmatrix}
+\]
+Equating entries with $M$ gives the linear system
+\[
+\begin{cases}
+	\alpha + \delta = a \\
+	\alpha - \delta = d \\
+	\beta - i \gamma = b \\
+	\beta + i \gamma = c \\
+\end{cases}
+\]
+From the first two equations,
+\[
+	\alpha = \frac{a + d}{2}, \quad \quad \delta = \frac{a - d}{2}
+\]
+From the last two,
+\[
+	\beta = \frac{b + c}{2}, \quad \quad \gamma = \frac{c - b}{2i}
+\]
+
+These formulae give a solution for $\alpha,\beta,\gamma,\delta \in \C$. Hence the four matrices span $M_2(\C)$. If we now consider the zero matrix, 
+\[	
+	M = \begin{pmatrix}
+		0 & 0 \\
+		0 & 0 \\
+		\end{pmatrix}
+\]
+Then the same decomposition
+\[	\alpha I + \beta \sigma_1 + \gamma \sigma_2 + \delta \sigma_3 = M	\]
+forces $\alpha = \beta = \gamma = \delta = 0$.
+$\newline\newline$
+This shows that the set $\{I, \sigma_1, \sigma_2, \sigma_3 \}$ is linearly independent. Therefore the Pauli matrices together with the identity form a basis of $M_2(\C)$ over $\C$
+
+\end{proof}
+We recall that the definition of the traces of a matrix and some of its properties. 
+For a square matrix $A = (a_{ij}) \in M_n(\C)$, the trace of $A$ is defined by 
+\[
+	\text{Tr}(A) = \sum_{i = 1}^n a_{ii}
+\]
+That is the trace is the sum of the diagonal entries of $A$ 
+$\newline \newline$
+Properties of the trace. \\
+For any $A,B \in M_n(\C)$ and any scalar $c \in \C$, the trace satisfies :
+\begin{enumerate}
+	\item Linearity: \\
+	\[	\text{Tr}(A + B) = \text{Tr}(A) + \text{Tr}(B),\quad \text{and} \quad \text{Tr}(cA) = c\, \text{Tr}(A) \] \\
+	\item Cyclic property: \\
+	\[	\text{Tr}(AB) = \text{Tr}(BA)	\]
+	\begin{proof}
+		let $A = (a_{ij})$ and $B = (b_{ij})$. Then
+		\[
+			\text{Tr}(A) = \sum_{i = 1}^n (AB)_{ii} = \sum_{i=1}^n \sum_{j=1}^n a_{ij}b_{ji} = \sum_{j=1}^n \sum_{i=1}^n b_{ji}a_{ij} = \sum_j^n (BA)_{jj} = \text{Tr}(BA)
+		\]
+	\end{proof}
+	\item Transpose invariance: \\
+	\[	\text{Tr}(A^T) = \text{Tr}(A)	\]
+	\item Conjugate transpose: \\
+	\[	\text{Tr}(A^*) = \overbar{\text{Tr}(A)}	\]
+	\item Trace of identity:
+	\[	\text{Tr}(I_n) = n	\]
+\end{enumerate}
+The proofs of the remaining properties are straightforward and follow directly from the definitions, so we omit them here.
+
+
+
+
+We now consider the real subspace $V$ of $M_2(\C)$ defined by
+\[
+	V = \text{span}_\R \{\sigma_1, \sigma_2, \sigma_3 \}
+\]
+That is,
+\[
+	V = \{x_1\sigma_1 + x_2\sigma_2 + x_3\sigma_3 \text{ } | \text{ } x_1,x_2,x_3 \in \R \}
+\]
+
+Every element $A \in V$ can be expressed uniquely as 
+\[
+	A = x_1\sigma_1 + x_2\sigma_2 + x_3\sigma_3 = 
+	\begin{pmatrix}
+	x_3 & x_1 - ix_2 \\
+	x_1 + ix_2 & -x_3 \\
+	\end{pmatrix}
+\]
+\begin{proposition}
+	The space $V$ can equivalently be described as the subset of $M_2(\C)$ consisting of all Hermitian and traceless matrices, That is,
+\[	V = \{	A \in M_2(\C) \, | \, A^* = A, \, \text{Tr}(A) = 0	\}	\]Where a matrix is called Hermitian if it is equal to its conjugate transpose, that is, $A^* = A$.
+
+\end{proposition}
+We can consider $A$ as a map 
+\[
+	\begin{aligned}
+	A : \text{ } &\R^3 \rightarrow V, \\
+		&\vec{x} \mapsto x_1\sigma_1 + x_2\sigma_2 + x_3\sigma_3
+	\end{aligned}
+\]
+
+\begin{proposition}
+	The map $A : \R^3 \rightarrow V$ is a real vector space isomorphism.
+\end{proposition}
+
+\begin{proof}
+$ $\newline
+\begin{enumerate} 
+	\item Linearity: 
+	\newline
+	For any $\vec{x} = (x_1,x_2,x_3), \vec{y} = (y_1,y_2,y_3) \in \R^3$ and $c \in \R$,
+\[
+	\begin{aligned}
+	A(\vec{x}+\vec{y}) &= A(x_1 + y_1, x_2 + y_2, x_3 + y_3) \\
+					   &= (x_1 + y_1) \sigma_1 + (x_2 + y_2) \sigma_2 + (x_3 + y_3) \sigma_3 \\
+					   &= x_1 \sigma_1 + y_1 \sigma_2 + x_2 \sigma_3 + y_2 \sigma_1 + x_3 \sigma_2 + y_3 \sigma_3 \\
+					   &= x_1 \sigma_1 + x_2 \sigma_2 + x_3 \sigma_3 + y_1 \sigma_1 + y_2 \sigma_2 + y_3 \sigma_3 \\
+					   &= A(\vec{x}) + A(\vec{y}) \\ \\
+	A(c\vec{x}) &= A(cx_1, cx_2, cx_3) \\
+				&= cx_1\sigma_1 + cx_2\sigma_2 + cx_3\sigma_3 \\
+				&= c(x_1\sigma_1 + x_2\sigma_2 + x_3\sigma_3) \\
+	\end{aligned}
+\]
+	\item Injectivity:
+	\newline
+	Suppose $A(\vec{x}) = A(\vec{y})$. Then
+\[	
+x_1\sigma_1 + x_2\sigma_2 + x_3\sigma_3 = y_1\sigma_1 + y_2\sigma_2 + y_3\sigma_3 \]
+Moving all terms to the left hand side gives
+\[
+(x_1 - y_1) \sigma_1 + (x_2 - y_2)\sigma_2 + (x_3 - y_3)\sigma_3 = 0 \\
+\]
+Since $\sigma_1,\sigma_2,\sigma_3$ are linearly independent, each coefficient must be zero. Therefore, 
+\[	x_1 = y_1, \quad x_2 = y_2, \quad x_3 = y_3.	\]
+Thus $A$ is injective.
+	\item Surjectivity:
+	\newline
+	By definition, every element of $V$ is a real linear combination of $\sigma_1, \sigma_2, \sigma_3$, hence for any $B \in V$, there exist $\vec{x} \in \R^3$ with $B = A(\vec{x})$. Thus $A$ is surjective.
+\end{enumerate}
+Since $A$ is linear, injective and surjective, it is a bijective linear map. Hence an isomorphism of real vector spaces.
+\end{proof}
+
+We now compute the trace inner product of the image under $A$. \\
+For any $\vec{x} = (x_1,x_2,x_3), \vec{y} = (y_1,y_2,y_3) \in R^3$, we have 
+\[	A(\vec{x})A(\vec{y}) = (x_1\sigma_1 + x_2\sigma_2 + x_3\sigma_3)(y_1\sigma_1 + y_2\sigma_2 + y_3\sigma_3) = \sum_{1 \leq i,j \leq 3} x_iy_j\sigma_i\sigma_j	\]
+Taking the trace yield
+\[	\text{Tr}(A(\vec{x})A(\vec{y})) = \sum_{1 \leq i,j \leq 3} x_iy_j\text{Tr}(\sigma_i\sigma_j)	\]
+Using the relation
+	\[	\text{Tr}(AB) = \text{Tr}(BA) \quad \text{and} \quad \sigma_i\sigma_j + \sigma_j\sigma_i = 0 \quad \text{for  } i \neq j	\]
+Since $\sigma_i^2 = I$ it follows that,
+\[	\text{Tr}(A(\vec{x})A(\vec{y})) = 	2\sum_{i = 1}^3 x_iy_i = 2\,\vec{x}\cdot\vec{y}\]
+Therefore we can define an inner product in $V$ that is equivalent to the one in $\R^3$ by
+\[	A(\vec{x}) \cdot A(\vec{y})	= \frac{1}{2}\text{Tr}(A(\vec{x})A(\vec{y}))\]
+
+Now let us define a transformation $T_U$ on $V$ where $U \in$ SU(2) by
+\[	T_U(A(\vec{x})) = UA(\vec{x})U^{-1} = UA(\vec{x})U^*.	\]
+The map $T_U$ indeed yields an element of $V$, as shown below.
+We regard $V$ as the subspace of $M_2(\C)$ consisting of all Hermitian, traceless matrices. These two properties completely charaterize $V$,as established earlier. Now observe that
+\[
+	\begin{cases}
+		(T_U(A(\vec{x})))^* = (UA(\vec{x})U^*)^* = UA(\vec{x})U^* = T_U(A(\vec{x})), \\
+		\text{Tr}(T_U(A(\vec{x})) = \text{Tr}(UA(\vec{x})U^{-1}) = \text{Tr}(U^{-1}UA(\vec{x})) = \text{Tr}(A(\vec{x})) = 0.
+	\end{cases}
+\]
+so $T_U(A(\vec{x})) \in V$. We can consider the inner product of $T_U(A(\vec{x}))$ and $T_U(A(\vec{y}))$,
+
+\[
+	\begin{aligned}
+	T_U(A(\vec{x})) \cdot T_U(A(\vec{y})) &= \frac{1}{2}\text{Tr}(UA(\vec{x})U^{-1}UA(\vec{y})U^{-1}) \\
+	&= \frac{1}{2}\text{Tr}(UA(\vec{x})A(\vec{y})U^{-1})\\
+	&= \frac{1}{2}\text{Tr}(U^{-1}UA(\vec{x})A(\vec{y}))\\
+	&= \frac{1}{2}\text{Tr}(A(\vec{x})A(\vec{y}))\\
+	&= A(\vec{x}) \cdot A(\vec{y}) \\
+	\end{aligned}
+\]
+This shows that $T_U$ preserve the inner product on $V$. Now, consider the corresponding transformation on $\R^3$ instead of $V$. Define
+\[	\phi_U = A^{-1} \circ T_U \circ A,	\]
+which represents $T_U$ as a transformation action on $\R^3$. From the previous equality, we have
+\[
+\begin{aligned}
+\phi_U(\vec{x}) \cdot \phi_U(\vec{y})
+&= \frac{1}{2}\text{Tr}( A(\phi_U(\vec{x}))\, A(\phi_U(\vec{y})) ) \\
+&= \frac{1}{2}\text{Tr}( A(A^{-1}(T_U(A(\vec{x}))))\, A(A^{-1}(T_U(A(\vec{y})))) ) \\
+&= \frac{1}{2}\text{Tr}( T_U(A(\vec{x}))\, T_U(A(\vec{y})) ) \\
+&= \frac{1}{2}\text{Tr}( A(\vec{x})\, A(\vec{y}) ) \\
+&= \vec{x} \cdot \vec{y}\, 
+\end{aligned}
+\]
+for all $\vec{x},\vec{y} \in \mathbb{R}^3$.
+Hence $\phi_U$ preserves the inner product on $\mathbb{R}^3$.
+Any linear map on $\mathbb{R}^3$ that preserves the inner product is orthogonal,
+and therefore
+\[
+    \phi_U \in O(3).
+\]
+
+
+Accordingly, we introduce the map
+\[
+\phi : SU(2) \to O(3), \qquad U \mapsto \phi_U,
+\]
+where
+\[
+\phi_U = A^{-1} \circ T_U \circ A .
+\]
+
+\begin{proposition}
+The map $\phi : SU(2) \to SO(3)$ is continuous.  
+We establish this by first writing an explicit expression for $\phi_U$ and then
+verifying continuity directly from the definition.
+\end{proposition}
+
+\begin{proof}
+We regard $SU(2)$ as a subspace of $M_2(\mathbb{C})$, which is identified with $\mathbb{R}^8$ with the usual topology. Likewise, $O(3)$ is a subspace of $M_3(\mathbb{R}) \cong \mathbb{R}^9$. A function into $M_3(\mathbb{R})$ is continuous if and only if each of its nine matrix-entry coordinate functions is continuous.
+\\
+\\
+Let $e_1,e_2,e_3$ be the standard basis of $\mathbb{R}^3$. The map $A : \mathbb{R}^3 \to V \subset M_2(\mathbb{C})$ satisfies
+\[
+x \cdot y = \frac12 \mathrm{Tr}(A(x)A(y)).
+\]
+
+
+For $i,j \in \{1,2,3\}$, the $(i,j)$\,-entry of the matrix $\phi(U)$ is
+\[
+(\phi(U))_{ij}
+= e_i \cdot \phi_U(e_j)
+= \frac12 \mathrm{Tr}\!\left( A(e_i)\,A(\phi_U(e_j)) \right).
+\]
+Since
+\[
+A(\phi_U(e_j)) = U\,A(e_j)\,U^\ast,
+\]
+we obtain
+\[
+(\phi(U))_{ij}
+= \frac12 \mathrm{Tr}\!\left( A(e_i)\,U\,A(e_j)\,U^\ast \right)
+= \frac12 \mathrm{Tr}\!\left( \sigma_i\,U\,\sigma_j\,U^\ast \right).
+\]
+
+The expression on the right side is built from the following operations:
+matrix multiplication, the adjoint map $U \mapsto U^\ast$, and the trace. 
+All of these operations are continuous in the matrix entries of $U$.
+Therefore each coordinate function $(\phi(U))_{ij}$ is continuous on $SU(2)$.
+
+Since all nine coordinate functions of $\phi$ are continuous, the map
+\[
+\phi : SU(2) \longrightarrow M_3(\mathbb{R})
+\]
+is continuous. Because $O(3)$ has the subspace topology from $M_3(\mathbb{R})$, the restricted map
+\[
+\phi : SU(2) \to O(3)
+\]
+is continuous as well.
+\end{proof}
+
