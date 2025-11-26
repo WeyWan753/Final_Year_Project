@@ -259,8 +259,7 @@ where
 
 \begin{proposition}
 The map $\phi : SU(2) \to SO(3)$ is continuous.  
-We establish this by first writing an explicit expression for $\phi_U$ and then
-verifying continuity directly from the definition.
+We establish this by first writing an explicit expression for $\phi(U)$, and then we verify that each coordinate function is continous. 
 \end{proposition}
 
 \begin{proof}
@@ -305,4 +304,332 @@ is continuous. Because $O(3)$ has the subspace topology from $M_3(\mathbb{R})$, 
 \]
 is continuous as well.
 \end{proof}
+We now return to the fact that $\varphi_{U} \in O(3)$. This does not imply that every
+element of $O(3)$ is obtained from some $U \in SU(2)$, so it is more accurate to
+regard the codomain of $\varphi$ as its image $\operatorname{Ran}(\varphi)$.
+
+Earlier in this report, we have already shown that every
+\[
+U \in SU(2)
+\]
+can be written as
+\[
+U =
+\begin{pmatrix}
+\alpha & \beta \\
+-\overline{\beta} & \overline{\alpha}
+\end{pmatrix},
+\qquad \alpha, \beta \in \mathbb{C}, \qquad |\alpha|^{2} + |\beta|^{2} = 1.
+\]
+Writing
+\[
+\alpha = a_{1} + i a_{2}, \qquad \beta = b_{1} + i b_{2},
+\]
+with $a_{1}, a_{2}, b_{1}, b_{2} \in \mathbb{R}$, the condition
+\[
+|\alpha|^{2} + |\beta|^{2} = 1
+\]
+becomes
+\[
+a_{1}^{2} + a_{2}^{2} + b_{1}^{2} + b_{2}^{2} = 1.
+\]
+This is precisely the equation of the $3$-sphere $S^{3} \subset \mathbb{R}^{4}$.
+Therefore, under this identification, $SU(2)$ is homeomorphic to $S^{3}$.
+Since $S^{3}$ is a connected topological space, it follows that $SU(2)$ is connected as well.
+
+
+
+
+
+\begin{proposition}
+Let $f : X \to Y$ be a continuous function between topological spaces.
+If $X$ is connected, then the image $\operatorname{Ran}(f)$ is connected.
+\end{proposition}
+
+\begin{proof}
+Assume for contradiction that $\operatorname{Ran}(f)$ is not connected.
+Then there exist nonempty open sets $A, B \subseteq \operatorname{Ran}(f)$ such that
+\[
+A \cup B = \operatorname{Ran}(f), \qquad A \cap B = \varnothing.
+\]
+
+Consider the preimages $f^{-1}(A)$ and $f^{-1}(B)$. We make the following observations.
+
+\medskip
+\noindent
+\textbf{1. $f^{-1}(A)$ and $f^{-1}(B)$ are nonempty.}  
+Since $A$ and $B$ are nonempty subsets of $\operatorname{Ran}(f)$, there exist
+$a, b \in X$ such that $f(a) \in A$ and $f(b) \in B$.  
+Thus $a \in f^{-1}(A)$ and $b \in f^{-1}(B)$.
+
+\medskip
+\noindent
+\textbf{2. $f^{-1}(A)$ and $f^{-1}(B)$ are open in $X$.}  
+Because $f$ is continuous and $A$ and $B$ are open in $\operatorname{Ran}(f)$
+(with the subspace topology), their preimages are open in $X$.
+
+\medskip
+\noindent
+\textbf{3. $f^{-1}(A)$ and $f^{-1}(B)$ are disjoint.}  
+If $x \in f^{-1}(A) \cap f^{-1}(B)$, then
+\[
+f(x) \in A \quad \text{and} \quad f(x) \in B,
+\]
+which contradicts $A \cap B = \varnothing$.  
+Hence
+\[
+f^{-1}(A) \cap f^{-1}(B) = \varnothing.
+\]
+
+\medskip
+\noindent
+\textbf{4. Their union is all of $X$.}  
+Let $x \in X$. Since $f(x) \in \operatorname{Ran}(f) = A \cup B$, we have
+$f(x) \in A$ or $f(x) \in B$.  
+Thus
+\[
+x \in f^{-1}(A) \cup f^{-1}(B),
+\]
+so
+\[
+f^{-1}(A) \cup f^{-1}(B) = X.
+\]
+
+\medskip
+Together, these four properties show that $f^{-1}(A)$ and $f^{-1}(B)$ form
+a separation of $X$, contradicting the assumption that $X$ is connected.
+Therefore $\operatorname{Ran}(f)$ must be connected.
+\end{proof}
+
+\begin{proposition}
+The subsets $\operatorname{SO}(3)$ and $-\operatorname{SO}(3)=\{A\in O(3):\text{det}(A)=-1\}$ form a separation of $O(3)$.
+In particular, both $\operatorname{SO}(3)$ and $-\operatorname{SO}(3)$ are nonempty, disjoint, open (in the subspace topology of $O(3)$), and
+\[
+\operatorname{SO}(3)\cup\big(-\operatorname{SO}(3)\big)=O(3).
+\]
+Hence $O(3)$ is disconnected and has exactly these two connected components.
+\end{proposition}
+
+\begin{proof}
+We verify the required properties in turn.
+
+\medskip
+\noindent\textbf{Nonemptiness.} \quad The identity matrix $I\in\operatorname{SO}(3)$, so $\operatorname{SO}(3)\neq\varnothing$.  
+Also $-I\in O(3)$ and $\text{det}(-I)=-1$, so $-\operatorname{SO}(3)\neq\varnothing$.
+
+\medskip
+\noindent\textbf{Disjointness.} \quad If $A\in\operatorname{SO}(3)\cap(-\operatorname{SO}(3))$, then $\text{det}(A)=1$ and $\text{det}(A)=-1$ simultaneously, which is impossible. Hence
+\[
+\operatorname{SO}(3)\cap\big(-\operatorname{SO}(3)\big)=\varnothing.
+\]
+
+\medskip
+\noindent\textbf{Union.} \quad For any $A\in O(3)$ one has $\text{det}(A)=\pm 1$. Thus every $A\in O(3)$ lies in $\operatorname{SO}(3)$ or in $-\operatorname{SO}(3)$, so
+\[
+\operatorname{SO}(3)\cup\big(-\operatorname{SO}(3)\big)=O(3).
+\]
+
+\medskip
+\noindent\textbf{Openness.} \quad We use the fact that the determinant map
+\[
+\text{det} : M_{3}(\mathbb{R}) \longrightarrow \mathbb{R}
+\]
+is continuous. The values of $\text{det}$ on $O(3)$ are exactly $\{1,-1\}$. Choose disjoint open intervals $U_{1},U_{-1}\subset\mathbb{R}$ with $1\in U_{1}$ and $-1\in U_{-1}$ (for example $U_{1}=(\tfrac{1}{2},\tfrac{3}{2})$ and $U_{-1}=(-\tfrac{3}{2},-\tfrac{1}{2})$).
+
+By continuity of $\text{det}$, the preimages $\text{det}^{-1}(U_{1})$ and $\text{det}^{-1}(U_{-1})$ are open in $M_{3}(\mathbb{R})$. Since $\text{det}(O(3))=\{1,-1\}$ and the intervals $U_1,U_{-1}$ are chosen to separate $1$ and $-1$, we have
+\[
+\operatorname{SO}(3)=\text{det}^{-1}(\{1\})\cap O(3)=\big(\text{det}^{-1}(U_{1})\cap O(3)\big),
+\]
+and similarly
+\[
+-\operatorname{SO}(3)=\text{det}^{-1}(\{-1\})\cap O(3)=\big(\text{det}^{-1}(U_{-1})\cap O(3)\big).
+\]
+Hence both $\operatorname{SO}(3)$ and $-\operatorname{SO}(3)$ are open in the subspace topology of $O(3)$.
+
+\medskip
+Since $\operatorname{SO}(3)$ and $-\operatorname{SO}(3)$ are nonempty, disjoint, open in $O(3)$ and their union equals $O(3)$, they form a separation of $O(3)$. Therefore $O(3)$ is disconnected and its two connected components are precisely $\operatorname{SO}(3)$ and $-\operatorname{SO}(3)$.
+\end{proof}
+
+
+\begin{proposition}
+Let $X$ be a topological space with a separation $A$ and $B$.
+If $Y\subseteq X$ is connected, then $Y$ is contained entirely in $A$ or entirely in $B$.
+\end{proposition}
+
+\begin{proof}
+Suppose for contradiction that $Y$ intersects both $A$ and $B$. 
+Then there exist points $y_A\in Y\cap A$ and $y_B\in Y\cap B$.
+
+Define
+\[
+A_Y = Y\cap A, \qquad B_Y = Y\cap B.
+\]
+
+Both sets are nonempty. Since $A$ and $B$ are open in $X$, 
+the intersections $A_Y$ and $B_Y$ are open in the subspace $Y$. 
+They are disjoint because $A$ and $B$ are disjoint, and their union is
+\[
+A_Y\cup B_Y = (Y\cap A)\cup (Y\cap B) = Y\cap (A\cup B) = Y.
+\]
+
+Thus $A_Y$ and $B_Y$ form a separation of $Y$, contradicting the fact that $Y$ is connected.
+Therefore $Y$ must lie entirely in $A$ or entirely in $B$.
+\end{proof}
+
+
+
+\begin{proposition}
+Let $\phi:SU(2)\to O(3)$ be the continuous map constructed above.
+Then $\operatorname{Ran}(\phi)\subseteq\operatorname{SO}(3)$.
+\end{proposition}
+
+\begin{proof}
+Since $\phi$ is continuous and $SU(2)$ is connected (homeomorphic to $S^3$),
+the image $\operatorname{Ran}(\phi)=\phi(SU(2))$ is a connected subset of $O(3)$.
+
+Recall that $O(3)=\operatorname{SO}(3)\cup\big(-\operatorname{SO}(3)\big)$ and that
+$\operatorname{SO}(3)$ and $-\operatorname{SO}(3)=\{A\in O(3):\text{det}(A)=-1\}$
+form a separation of $O(3)$ (they are nonempty, disjoint, open in the subspace topology,
+and their union is $O(3)$). By the preceding proposition on connected subspaces, any connected
+subset of $O(3)$ must lie entirely in one of the two separated pieces. Hence
+\[
+\operatorname{Ran}(\phi)\subseteq \operatorname{SO}(3)
+\quad\text{or}\quad
+\operatorname{Ran}(\phi)\subseteq -\operatorname{SO}(3).
+\]
+
+Finally, note that $\phi(I)=I$, because
+$T_{I}(A(x))=IA(x)I^{-1}=A(x)$ and thus $\phi_{I}=\mathrm{id}_{\mathbb{R}^3}$.
+In particular $I\in\operatorname{Ran}(\phi)$ and $I\in\operatorname{SO}(3)$, so
+$\operatorname{Ran}(\phi)$ cannot be contained in $-\operatorname{SO}(3)$. Therefore
+\[
+\operatorname{Ran}(\phi)\subseteq\operatorname{SO}(3),
+\]
+as required.
+\end{proof}
+
+
+
+
+
+
+
+
+
+\section{Open neighborhoods generate connected topological groups, and application to \(\phi:SU(2)\to SO(3)\)}
+
+\begin{definition}[Topological group]
+A \emph{topological group} is a group \(G\) equipped with a topology such that
+the multiplication map \(G\times G\to G,\ (x,y)\mapsto xy\) and the inversion map
+\(G\to G,\ x\mapsto x^{-1}\) are continuous.
+\end{definition}
+
+\begin{lemma}
+Let \((X,\tau)\) be a topological space. If \(X\) is connected then the only subsets
+of \(X\) which are both open and closed (clopen) are \(\varnothing\) and \(X\) itself.
+\end{lemma}
+
+\begin{proof}
+Let \(C\subset X\) be clopen. If \(C\neq\varnothing\) and \(C\neq X\) then
+\(C\) and \(X\setminus C\) are nonempty disjoint open sets whose union is \(X\),
+contradicting connectedness. Hence any clopen subset must be either \(\varnothing\)
+or \(X\).
+\end{proof}
+
+\begin{definition}[Symmetric neighborhood]
+Let \(G\) be a topological group with identity \(e\). An open neighborhood
+\(V\subset G\) of \(e\) is called \emph{symmetric} if \(V^{-1}=\{v^{-1}:v\in V\}=V\).
+\end{definition}
+
+\begin{lemma}
+If \(U\) is any open neighborhood of the identity in a topological group \(G\),
+then \(V:=U\cap U^{-1}\) is an open symmetric neighborhood of the identity contained
+in \(U\).
+\end{lemma}
+
+\begin{proof}
+The inversion map is continuous, so \(U^{-1}\) is open. The intersection \(V=U\cap U^{-1}\)
+is therefore open, contains \(e\), and satisfies \(V^{-1}=(U\cap U^{-1})^{-1}=U^{-1}\cap U=V\).
+\end{proof}
+
+\begin{proposition}\label{prop:H-is-clopen-subgroup}
+Let \(G\) be a topological group and let \(V\subset G\) be an open symmetric neighborhood
+of the identity \(e\). For each integer \(k\ge 1\) define
+\[
+V^{k}:=\underbrace{V\cdot V\cdots V}_{k\text{ times}},
+\qquad
+H:=\bigcup_{k\ge 1} V^{k}.
+\]
+Then \(H\) is an open and closed subgroup of \(G\).
+\end{proposition}
+
+\begin{proof}
+\emph{(Subgroup).}
+If \(x\in V^{m}\) and \(y\in V^{n}\) then \(xy\in V^{m+n}\subset H\), so \(H\) is closed
+under products. Since \(V\) is symmetric, \((V^{m})^{-1}=V^{m}\), hence \(x^{-1}\in V^{m}\subset H\).
+The identity \(e\in V\subset H\). Associativity is inherited from \(G\). Thus \(H\) is a subgroup.
+
+\medskip\noindent
+\emph{(Openness).}
+We prove by induction that each \(V^{k}\) is open. The base \(V^{1}=V\) is open by assumption.
+Assume \(V^{k}\) is open. Then
+\[
+V^{k+1}=V\cdot V^{k}=\bigcup_{a\in V} aV^{k}.
+\]
+For each fixed \(a\in V\) the left-translation \(L(a):G\to G,\ L(a)(x)=ax\), is a homeomorphism
+(since multiplication is continuous and \(L(a)^{-1}=L(a^{-1})\) is continuous). Hence \(aV^{k}=L(a)(V^{k})\)
+is open. As a union of open sets, \(V^{k+1}\) is open. By induction all \(V^{k}\) are open, and so
+\(H=\bigcup_{k\ge1}V^{k}\) is open.
+
+\medskip\noindent
+\emph{(Closedness).}
+Each left coset \(gH\) is open because \(H\) is open and left translations are homeomorphisms.
+Therefore the complement \(G\setminus H=\bigcup_{g\notin H} gH\) is a union of open sets, hence open.
+Thus \(H\) is closed as well.
+
+Combining the above, \(H\) is an open-and-closed subgroup of \(G\), as required.
+\end{proof}
+
+\begin{corollary}\label{cor:open-neighborhoods-generate-connected-group}
+If \(G\) is a connected topological group and \(U\) is any open neighborhood of the
+identity \(e\), then
+\[
+G=\bigcup_{k\ge1} U^{k}.
+\]
+Equivalently, every open neighborhood of \(e\) topologically generates \(G\).
+\end{corollary}
+
+\begin{proof}
+By the previous lemma we may replace \(U\) by the symmetric open neighborhood
+\(V=U\cap U^{-1}\subset U\). Form \(H=\bigcup_{k\ge1}V^{k}\). By
+Proposition \ref{prop:H-is-clopen-subgroup}, \(H\) is a nonempty open-and-closed subgroup
+of \(G\). Since \(G\) is connected and \(H\neq\varnothing\), the only possibility is \(H=G\).
+Because \(V\subset U\) we have \(\bigcup_{k\ge1}U^{k}\supset\bigcup_{k\ge1}V^{k}=G\),
+hence \(\bigcup_{k\ge1}U^{k}=G\).
+\end{proof}
+
+\medskip
+\noindent\textbf{Application to \(\phi:SU(2)\to SO(3)\).}
+
+Let \(\phi:SU(2)\to SO(3)\) be the continuous group homomorphism constructed earlier.
+We state without proof that there exist open neighborhoods
+\(A\subset SU(2)\) of the identity and \(B\subset SO(3)\) of the identity such that
+the restricted map \(\phi|_{A}:A\to B\) is a homeomorphism. Then:
+
+\begin{itemize}
+  \item \(B=\phi(A)\subset\operatorname{Ran}(\phi)\).
+  \item Since \(\phi\) is a homomorphism, for every \(k\ge 1\) we have
+        \(\phi(A^{k})=\phi(A)^{k}=B^{k}\), so \(B^{k}\subset\operatorname{Ran}(\phi)\).
+  \item Therefore \(\bigcup_{k\ge1}B^{k}\subset\operatorname{Ran}(\phi)\).
+  \item By Corollary \ref{cor:open-neighborhoods-generate-connected-group} (applied to \(G=SO(3)\),
+        which is connected), \(\bigcup_{k\ge1}B^{k}=SO(3)\).
+\end{itemize}
+
+Hence \(SO(3)\subset\operatorname{Ran}(\phi)\). Together with the previously established
+reverse inclusion \(\operatorname{Ran}(\phi)\subset SO(3)\), we conclude
+\[
+\operatorname{Ran}(\phi)=SO(3).
+\]
+
+\qed
 
